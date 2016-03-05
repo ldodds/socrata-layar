@@ -7,5 +7,7 @@
   	"id": "reference"  	
   },
   "2nfa-a2s6": {
+  	"id": "id",
+  	"imageURL": "thumbnail"
   }
 }

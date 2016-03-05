@@ -57,7 +57,8 @@ module SocrataLayar
           },
           "anchor" => {
             "geolocation" => { "lat" => result["location"]["latitude"], "lon" => result["location"]["longitude"] } 
-          }          
+          },
+          "imageURL" => field_value(result, config["imageURL"], nil)       
         }
       end
       layar["hotspots"] = hotspots
