@@ -15,6 +15,7 @@ module SocrataLayar
     
     #Configure application level options
     configure do |app|
+      set :config, JSON.parse( File.read(File.dirname(__FILE__) + "/../etc/dataset-layers.json") )      
     end
       
     get "/" do
@@ -22,11 +23,10 @@ module SocrataLayar
     end  
         
     get "/layar/:id" do
-      puts params[:id]
       @dataset = dataset(params[:id])
       @pois = dataset_pois(params[:id], params[:lat], params[:lon], params[:radius])
       content_type "application/json"
-      return convert_to_layar( params[:layerName], @pois ).to_json
+      return convert_to_layar( params[:layerName], @pois, settings.config[params[:id]] ).to_json
     end
           
     def dataset(id)
@@ -40,7 +40,7 @@ module SocrataLayar
       return result
     end 
      
-    def convert_to_layar(name, results, title="bintype", description="locationdescription")
+    def convert_to_layar(name, results, config )
       layar = {}
       layar["layer"] = name
       layar["errorString"] = "ok"
@@ -50,8 +50,8 @@ module SocrataLayar
         hotspots << {
           "id" => "#{i}",
           "text" => {
-            "title" => result[title],
-            "description" => result[description]
+            "title" => field( result, config["title"], "title"),
+            "description" => field( result, config["description"], "description")
           },
           "anchor" => {
             "geolocation" => { "lat" => result["location"]["latitude"], "lon" => result["location"]["longitude"] } 
@@ -60,6 +60,10 @@ module SocrataLayar
       end
       layar["hotspots"] = hotspots
       return layar
+    end
+    
+    def field(result, field_name, default)
+      return result[field_name] || result[default]
     end
     
     not_found do
