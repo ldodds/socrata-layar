@@ -25,6 +25,7 @@ module SocrataLayar
       puts params[:id]
       @dataset = dataset(params[:id])
       @pois = dataset_pois(params[:id], params[:lat], params[:lon], params[:radius])
+      content_type "application/json"
       return convert_to_layar( params[:layerName], @pois ).to_json
     end
           
@@ -59,7 +60,7 @@ module SocrataLayar
     
     not_found do
       'Not Found'
-    end
+    end 
       
   end
 end
