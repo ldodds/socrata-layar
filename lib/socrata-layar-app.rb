@@ -49,8 +49,10 @@ module SocrataLayar
       results.each_with_index do |result, i|
         hotspots << {
           "id" => "#{i}",
-          "title" => result[title],
-          "description" => result[description],
+          "text" => {
+            "title" => result[title],
+            "description" => result[description]
+          },
           "anchor" => {
             "geolocation" => { "lat" => result["location"]["latitude"], "lon" => result["location"]["longitude"] } 
           }          
