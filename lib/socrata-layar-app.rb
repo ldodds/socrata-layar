@@ -46,7 +46,8 @@ module SocrataLayar
       layar = {}
       layar["layer"] = name
       layar["errorString"] = "ok"
-      layar["errorCode"] = 0
+      layar["errorCode"] = 0,
+      layar["showBiwOnClick"] = true
       hotspots = []
       results.each_with_index do |result, i|
         hotspots << {
