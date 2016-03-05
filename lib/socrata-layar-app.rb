@@ -58,7 +58,7 @@ module SocrataLayar
           "anchor" => {
             "geolocation" => { "lat" => result["location"]["latitude"], "lon" => result["location"]["longitude"] } 
           },
-          "imageURL" => field_value(result, config["imageURL"], nil)       
+          "imageURL" => image_field_value(result, config["imageURL"], nil)       
         }
       end
       layar["hotspots"] = hotspots
@@ -73,6 +73,11 @@ module SocrataLayar
       return result[field_name] || default
     end
 
+    def image_field_value(result, field_name, default)
+      val = result[field_name]
+      return val["url"] if val
+      return default
+    end
         
     not_found do
       'Not Found'
