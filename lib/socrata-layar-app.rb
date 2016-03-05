@@ -26,7 +26,8 @@ module SocrataLayar
       @dataset = dataset(params[:id])
       @pois = dataset_pois(params[:id], params[:lat], params[:lon], params[:radius])
       content_type "application/json"
-      return convert_to_layar( params[:layerName], @pois, settings.config[params[:id]] ).to_json
+      config = settings.config[params[:id]] || {}
+      return convert_to_layar( params[:layerName], @pois, config ).to_json
     end
           
     def dataset(id)
@@ -40,6 +41,7 @@ module SocrataLayar
       return result
     end 
      
+    #http://www.bathnes.gov.uk/sites/default/files/publicart/
     def convert_to_layar(name, results, config )
       layar = {}
       layar["layer"] = name
@@ -48,7 +50,7 @@ module SocrataLayar
       hotspots = []
       results.each_with_index do |result, i|
         hotspots << {
-          "id" => "#{i}",
+          "id" => field_value( result, config["id"], "#{i}"),
           "text" => {
             "title" => field( result, config["title"], "title"),
             "description" => field( result, config["description"], "description")
@@ -62,10 +64,15 @@ module SocrataLayar
       return layar
     end
     
-    def field(result, field_name, default)
-      return result[field_name] || result[default]
+    def field(result, field_name, default_field)
+      return result[field_name] || result[default_field]
     end
-    
+
+    def field_value(result, field_name, default)
+      return result[field_name] || default
+    end
+
+        
     not_found do
       'Not Found'
     end 
