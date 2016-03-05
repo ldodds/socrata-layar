@@ -43,6 +43,8 @@ module SocrataLayar
     def convert_to_layar(name, results, title="bintype", description="locationdescription")
       layar = {}
       layar["layer"] = name
+      layar["errorString"] = "ok"
+      layar["errorCode"] = 0
       hotspots = []
       results.each_with_index do |result, i|
         hotspots << {
@@ -51,9 +53,7 @@ module SocrataLayar
           "description" => result[description],
           "anchor" => {
             "geolocation" => { "lat" => result["location"]["latitude"], "lon" => result["location"]["longitude"] } 
-          },
-          "errorString" => "ok", 
-          "errorCode" => 0          
+          }          
         }
       end
       layar["hotspots"] = hotspots
