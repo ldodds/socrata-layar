@@ -46,12 +46,12 @@ module SocrataLayar
       layar = {}
       layar["layer"] = name
       layar["errorString"] = "ok"
-      layar["errorCode"] = 0,
-      layar["showBiwOnClick"] = true
+      layar["errorCode"] = 0
       hotspots = []
       results.each_with_index do |result, i|
         hotspots << {
           "id" => field_value( result, config["id"], "#{i}"),
+          "showBiwOnClick" => true,  
           "text" => {
             "title" => field( result, config["title"], "title"),
             "description" => field( result, config["description"], "description")
