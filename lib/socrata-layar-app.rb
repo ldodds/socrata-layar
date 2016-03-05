@@ -51,7 +51,9 @@ module SocrataLayar
           "description" => result[description],
           "anchor" => {
             "geolocation" => { "lat" => result["location"]["latitude"], "lon" => result["location"]["longitude"] } 
-          }
+          },
+          "errorString" => "ok", 
+          "errorCode" => 0          
         }
       end
       layar["hotspots"] = hotspots
