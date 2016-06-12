@@ -5,7 +5,6 @@ module SocrataLayar
       @client = client
     end
     
-    #http://www.bathnes.gov.uk/sites/default/files/publicart/
     def convert_to_layar(name, results, config )
       layar = {}
       layar["layer"] = name
