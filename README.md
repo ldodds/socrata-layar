@@ -85,6 +85,8 @@ configure something like this for the Layar API URL:
 http://socrata-layar.herokuapp.com/layar/uau9-ufy3;layerName=bathpublicark05
 ```
 
+*Note*: the framework has a simple web based interface to help you build these URLs. Here's [an example](http://socrata-layar.herokuapp.com/dataset/tgc7-2htd).
+
 There are a number of other configuration items in Layar which can help tailor the display and behaviour of your layer.
 
 ## Testing your Layar
@@ -95,13 +97,23 @@ There are a number of other configuration items in Layar which can help tailor t
 
 Be sure to publish the layer once completed so other people can see it.
 
+## Deploy to Heroku
+
+If you have a Heroku account then you can deploy this framework for free. Just click the button. When you're prompted, give the application a 
+name and the domain for the Socrata catalog you'll be building layers against. It will default to the Bath: Hacked datastore if you just want 
+to test it out.
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 ## Example Deployment
 
 There's a sample app running on Heroku.
 
 * [Homepage](http://socrata-layar.herokuapp.com/)
+* [Layar Configuraton](http://socrata-layar.herokuapp.com/dataset/tgc7-2htd). Change the id in the URL to configure a different dataset.
 * [Points of interest from the Bath Public Art catalogue, within 100m of the Guild Hall](http://socrata-layar.herokuapp.com/layar/uau9-ufy3?lat=51.382436&lon=-2.359143&radius=100)
 * Example of a published layer using this framework: [Bath Food Hygiene](https://www.layar.com/layers/bathfoodhygi9ru4). However its not really useful unless you're in or around Bath!
+
 
 
 
