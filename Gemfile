@@ -6,10 +6,18 @@ gem 'json'
 gem 'soda-ruby'
 gem 'dotenv'
 gem 'rest-client'
-gem 'shotgun'
 
 gem 'sinatra-static-assets'
 gem 'sinatra-contrib'
 
-#gem 'rspec'
-#gem "simplecov-rcov"
+gem 'rack-matrix_params', :git=>"https://github.com/jphastings/rack-matrix_params.git"
+
+group :test, :development do
+  gem 'shotgun'
+end
+
+group :test do
+  gem 'rspec'
+  gem 'rack-test'
+  gem 'vcr'  
+end

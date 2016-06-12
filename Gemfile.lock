@@ -1,7 +1,15 @@
+GIT
+  remote: https://github.com/jphastings/rack-matrix_params.git
+  revision: d751baaee25d15ca0a02f1df175c72f864c60682
+  specs:
+    rack-matrix_params (0.0.7)
+      rack
+
 GEM
   remote: https://rubygems.org/
   specs:
     backports (3.6.8)
+    diff-lcs (1.2.5)
     domain_name (0.5.20160216)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.1.0)
@@ -23,6 +31,19 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
+    rspec (3.4.0)
+      rspec-core (~> 3.4.0)
+      rspec-expectations (~> 3.4.0)
+      rspec-mocks (~> 3.4.0)
+    rspec-core (3.4.4)
+      rspec-support (~> 3.4.0)
+    rspec-expectations (3.4.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-mocks (3.4.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-support (3.4.1)
     shotgun (0.9.1)
       rack (>= 1.0)
     sinatra (1.4.7)
@@ -48,6 +69,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.2)
+    vcr (3.0.3)
 
 PLATFORMS
   ruby
@@ -55,9 +77,13 @@ PLATFORMS
 DEPENDENCIES
   dotenv
   json
+  rack-matrix_params!
+  rack-test
   rest-client
+  rspec
   shotgun
   sinatra
   sinatra-contrib
   sinatra-static-assets
   soda-ruby
+  vcr

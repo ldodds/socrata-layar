@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 module SocrataLayar 
-  class URIFactory
+  class Client
     
     attr_reader :base
     
@@ -26,6 +26,14 @@ module SocrataLayar
     def dataset_endpoint(id)
       return uri("resource/" + id)
     end
-          
+              
+    def query_pois(dataset, lat, lng, radius, field="location")
+      response = RestClient.get dataset_endpoint(dataset), {:params => {"$where" => "within_circle(#{field}, #{lat}, #{lng}, #{radius})"} }            
+      result = JSON.parse( response.to_str )
+      return result
+    end
+    
   end
+  
+  
 end
