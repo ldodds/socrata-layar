@@ -1,0 +1,110 @@
+<script>
+$( document ).ready(function() {
+  new Clipboard('.btn');
+
+  $("#api-endpoint").submit(function(e){
+        e.preventDefault();
+  });
+    	
+  BASE="http://<%= settings.client.base %>/layar/<%= @dataset.id %>"
+  CONFIG = {
+	"title":"title",
+    "description":"description",  
+    "field": "<%= @dataset.location_column["fieldName"] %>" 
+  }
+  	  
+  function generate_url(config) {
+    params = $.param(config).replace("&", ";");
+  	$("#endpoint").val(BASE + ";" + params);
+  }
+
+  $(".column_purpose").on( "change", function() {  
+    option = this
+    $.each(CONFIG, function(k,v) {
+    	if (v === option.id)
+    		delete CONFIG[k];
+    });
+    
+    $(".column_purpose").each( function() {
+    	console.log($(this));
+    	console.log( $(this).attr("id") === $(option).attr("id") );
+    	if ( $(this).attr("id") !== $(option).attr("id") && $(this).val() === $(option).val() ) {
+    		$(this).find('option:eq(0)').prop('selected', true);
+	   	}
+    });
+    
+    if (this.value === "location")
+    	CONFIG["field"] = this.id;    	
+    else
+        if (this.value != "IGNORE") {
+  			CONFIG[ this.value ] = this.id;
+  		}
+  		
+    config = {"title": "title", "description": "description", "field": "location"};
+    $.extend(config, CONFIG);	
+  	generate_url(config);
+  	
+  });
+  
+});
+</script>
+
+<h1>Configure Layar Endpoint</h1>
+
+<p>
+Configuring a Layar API adapter for the <code><%= @dataset.title %></code> dataset (<code><%= @dataset.id %></code>)
+</p>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">API Endpoint</h3>
+  </div>
+  <div class="panel-body">
+  	<form id="api-endpoint" class="form-horizontal">
+  		<div class="form-group">
+  			<div class="col-sm-10">
+			<input id="endpoint" class="form-control" type="text" value="http://<%= settings.client.base %>/layar/<%= @dataset.id %>"></input>
+			</div>
+		</div>
+		<button class="btn" data-clipboard-target="#endpoint">
+			Copy to clipboard
+		</button>
+	</form>
+</span>
+</div>
+
+  </div>
+</div>
+
+
+
+<h2>Dataset Columns</h2>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Field Name</th>
+			<th>Type</th>
+			<th>Purpose</th>
+		</tr>
+	</thead>
+ <% @dataset.columns.each do |column| %>
+ 	<tr>
+ 		<td><%= column["name"] %></td>
+ 		<td><%= column["fieldName"] %></td>
+ 		<td><%= column["dataTypeName"] %></td>
+ 		<td>
+ 			<select class="column_purpose" id="<%= column["fieldName"] %>">
+ 				<option value="IGNORE">IGNORE</option>
+ 				<option value="id">Identifier</option>
+ 				<% if column["dataTypeName"] == "location" %>
+ 					<option value="location" <%= "selected" if column["name"] == @dataset.location_column["name"] %>>Location</option>
+ 				<% end %>
+ 				<option value="title">Title</option>
+ 				<option value="description">Description</option>
+ 			</select>
+ 		<td>
+ 	</tr>
+ <% end %>
+</table>

@@ -8,12 +8,16 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    addressable (2.4.0)
     backports (3.6.8)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
     diff-lcs (1.2.5)
     domain_name (0.5.20160216)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.1.0)
     ffi (1.9.10)
+    hashdiff (0.3.0)
     hashie (3.4.3)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
@@ -44,6 +48,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
+    safe_yaml (1.0.4)
     shotgun (0.9.1)
       rack (>= 1.0)
     sinatra (1.4.7)
@@ -70,6 +75,10 @@ GEM
       unf_ext
     unf_ext (0.0.7.2)
     vcr (3.0.3)
+    webmock (2.1.0)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff
 
 PLATFORMS
   ruby
@@ -87,3 +96,4 @@ DEPENDENCIES
   sinatra-static-assets
   soda-ruby
   vcr
+  webmock
