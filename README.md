@@ -38,7 +38,7 @@ Sensible defaults have been chosen to try to reduce the need for any configurati
 
 | Config | Description | Default
 | --- | --- | --- |
-| `layarName` | Name of the Layar | None
+| `layerName` | Name of the Layar | None
 | `id` | Field containing a unique id for the POI | Generates a unique integer
 | `field` | Name of the location field. Must have a data type of `location` in Socrata | `location`
 | `title` | Field containing the title of the POI | `title`
@@ -69,8 +69,31 @@ You can use the provided forms to further configure the Layar:
 
 * Ensure the type is "Geo Layer"
 * Unless your dataset has global coverage, specify the country in which it should be used
-* Make a note of the layar name which you should use in your `layarName` config.
-* Your API URL will be the base URL of the application plus any configuration parameters
+* Make a note of the layar name which you should use in your `layerName` config.
+
+The base URL of your layar will be:
+
+```
+<location-of-application/layar/<socrata-dataset-id>
+```
+
+The `layerName` configuration seems optional, but probably best to include it. So for example for the test deployment at
+`http://socrata-layar.herokuapp.com` in order to create a layer for the Bath Public Art Catalogue (`uau9-ufy3`) we would 
+configure something like this for the Layar API URL:
+
+```
+http://socrata-layar.herokuapp.com/layar/uau9-ufy3;layerName=bathpublicark05
+```
+
+There are a number of other configuration items in Layar which can help tailor the display and behaviour of your layer.
+
+## Testing your Layar
+
+* Install the Layar mobile application
+* Sign in using your developer account details
+* Look at the test layers and your new layer should be visible
+
+Be sure to publish the layer once completed so other people can see it.
 
 ## Example Deployment
 
