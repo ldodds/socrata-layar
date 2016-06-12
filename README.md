@@ -101,6 +101,7 @@ There's a sample app running on Heroku.
 
 * [Homepage](http://socrata-layar.herokuapp.com/)
 * [Points of interest from the Bath Public Art catalogue, within 100m of the Guild Hall](http://socrata-layar.herokuapp.com/layar/uau9-ufy3?lat=51.382436&lon=-2.359143&radius=100)
+* Example of a published layer using this framework: [Bath Food Hygiene](https://www.layar.com/layers/bathfoodhygi9ru4). However its not really useful unless you're in or around Bath!
 
 
 
