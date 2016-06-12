@@ -1,0 +1,18 @@
+{
+  "name": "Socrata-Layar Adapter",
+  "description": "Provides an API adapter between the Layar augmented reality app and Socrata data stores",
+  "keywords": [
+    "socrata",
+    "augmented reality",
+    "layar"
+  ],
+  "repository": "https://github.com/ldodds/socrata-layar",
+  "success_url": "/",
+  "env": {
+    "SOCRATA_CATALOG": {
+      "description": "The domain at which the socrata catalog can be found",
+      "required": true,
+      "value": "data.bathhacked.org"
+    },
+  }
+}
