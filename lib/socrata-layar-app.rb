@@ -15,7 +15,7 @@ module SocrataLayar
                 
     get "/layar/:id" do      
       
-      dataset_config = default_config.merge( params[ params[:id] ] )
+      dataset_config = default_config.merge( params[ params[:id] ] || {} )
         
       adapter = SocrataLayar::Adapter.new(settings.client)
       pois = settings.client.query_pois( params[:id], params[:lat], params[:lon], params[:radius], dataset_config["field"] )      
