@@ -10,27 +10,31 @@ module SocrataLayar
     end
     
     def uri(path)
-      return "http://#{@base}/#{path}"
+      "http://#{@base}/#{path}"
     end
       
     def dataset_home(id)
-      return uri("datasets/" + id)
+      uri("datasets/" + id)
     end  
     
     #Detailed metadata for a dataset, using Socrata JSON format. Includes custom metadata
+    def dataset_metadata_url(id)
+      uri("views/" + id + ".json")
+    end
+    
     def dataset_metadata(id)
-      return uri("views/" + id + ".json")
+      response = RestClient.get dataset_metadata_url(id)
+      return SocrataLayar::Dataset.new( JSON.parse( response.to_str ) ) 
     end
     
     #The default API for the dataset
     def dataset_endpoint(id)
-      return uri("resource/" + id)
+      uri("resource/" + id)
     end
               
     def query_pois(dataset, lat, lng, radius, field="location")
       response = RestClient.get dataset_endpoint(dataset), {:params => {"$where" => "within_circle(#{field}, #{lat}, #{lng}, #{radius})"} }            
-      result = JSON.parse( response.to_str )
-      return result
+      return JSON.parse( response.to_str )
     end
     
   end

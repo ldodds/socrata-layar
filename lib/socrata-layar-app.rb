@@ -13,6 +13,12 @@ module SocrataLayar
       erb :index
     end  
                 
+    get "/dataset/:id" do
+      @dataset = settings.client.dataset_metadata( params[:id] )
+      @error = "No location column found for this dataset" unless @dataset.location_column != nil
+      erb :dataset
+    end
+    
     get "/layar/:id" do      
       
       dataset_config = default_config.merge( params[ params[:id] ] || {} )
